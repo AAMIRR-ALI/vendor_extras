@@ -1,0 +1,10 @@
+android_app_import {
+    name: "ytmanager",
+    apk: "ytmanager.apk",
+    preprocessed: true,
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
