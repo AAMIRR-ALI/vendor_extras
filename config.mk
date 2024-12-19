@@ -17,5 +17,5 @@ include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
 PRODUCT_PACKAGES += \
     ytmanager \
-    rvyoutube \
-    microg
+    microg \
+    x
