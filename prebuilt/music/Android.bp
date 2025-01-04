@@ -1,0 +1,11 @@
+android_app_import {
+    name: "music",
+    apk: "music.apk",  // Path to the APK
+    preprocessed: true,
+    presigned: true,
+    privileged: false,          // Set to true if it needs to be in /system/priv-app
+    dex_preopt: {
+        enabled: false,
+    },
+}
+

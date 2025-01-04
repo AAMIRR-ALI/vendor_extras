@@ -18,4 +18,5 @@ include $(call all-subdir-makefiles,$(LOCAL_PATH))
 PRODUCT_PACKAGES += \
     ytmanager \
     microg \
-    x
+    x \
+    music
