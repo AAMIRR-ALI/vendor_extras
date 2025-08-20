@@ -1,6 +1,6 @@
 android_app_import {
-    name: "ytmanager",
-    apk: "ytmanager.apk",
+    name: "rvx_man",
+    apk: "rvx_man.apk",
     preprocessed: true,
     presigned: true,
     product_specific: true,
