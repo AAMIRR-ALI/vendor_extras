@@ -17,4 +17,5 @@ include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
 PRODUCT_PACKAGES += \
 	rvx_man \
-	bcr
+	Bcr \
+	nekogram \
