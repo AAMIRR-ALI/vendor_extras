@@ -9,3 +9,30 @@ android_app_import {
         enabled: false,
     },
 }
+
++cc_prebuilt_library_shared {
++    name: "libelements",
++    owner: "realme",
++    strip: {
++        none: true,
++    },
++    target: {
++        android_arm64: {
++            srcs: [
++                "proprietary/system/lib/libelements.so",
++            ],
++            shared_libs: [
++                "libgoogle3",
++                "libandroid",
++                "liblog",
++                "libdl",
++                "libc",
++                "libm",
++            ],
++        },
++    },
++    compile_multilib: "32",
++    prefer: true,
++    system_ext_specific: true,
++}
+
