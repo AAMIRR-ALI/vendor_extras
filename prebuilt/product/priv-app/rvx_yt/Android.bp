@@ -4,6 +4,7 @@ android_app_import {
     preprocessed: true,
     presigned: true,
     product_specific: true,
+    skip_preprocessed_apk_checks: true,
     dex_preopt: {
         enabled: false,
     },
