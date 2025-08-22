@@ -19,3 +19,4 @@ PRODUCT_PACKAGES += \
 	rvx_man \
 	Bcr \
 	nekogram \
+	rvx_yt

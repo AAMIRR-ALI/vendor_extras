@@ -1,0 +1,10 @@
+android_app_import {
+    name: "rvx_yt",
+    apk: "rvx_yt.apk",
+    preprocessed: true,
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
