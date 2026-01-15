@@ -1,52 +1,44 @@
 #!/bin/bash
 
-# Fix Git LFS configuration for already-pushed large files
+set -euo pipefail
 
-set -e
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
 
-echo "================================"
-echo "Fixing Git LFS for ReVanced Repo"
-echo "================================"
-echo ""
-
-# Check if git lfs is installed
-if ! command -v git-lfs &> /dev/null; then
-    echo "Error: Git LFS is not installed!"
-    echo "Please install it from https://git-lfs.github.com"
+if ! command -v git-lfs >/dev/null 2>&1; then
+    printf '%s\n' "Error: git-lfs is not installed." >&2
+    printf '%s\n' "Install it, then rerun this script." >&2
     exit 1
 fi
 
-echo "[1/5] Initializing Git LFS..."
 git lfs install --force
-
-echo "[2/5] Tracking APK files with LFS..."
 git lfs track "*.apk"
 git add .gitattributes
 
-echo "[3/5] Resetting git history to remove large files..."
-# Get the last commit hash before the large files were added
-# We'll do a soft reset to allow re-adding files properly
-git reset HEAD~2
+base_ref="origin/main"
+if git rev-parse --verify "$base_ref" >/dev/null 2>&1; then
+    git reset --soft "$base_ref"
+else
+    git reset --soft HEAD~1
+fi
 
-echo "[4/5] Clearing git cache for APK files..."
-git rm --cached common/product/app/YouTube/com.google.android.youtube.apk 2>/dev/null || true
-git rm --cached common/product/app/YTMusic/com.google.android.apps.youtube.music.apk 2>/dev/null || true
-git rm --cached common/product/etc/rv/YTPatched.apk 2>/dev/null || true
-git rm --cached common/product/etc/rv/YTMusicPatched.apk 2>/dev/null || true
+apk_files=(
+    "common/product/app/YouTube/com.google.android.youtube.apk"
+    "common/product/app/YTMusic/com.google.android.apps.youtube.music.apk"
+    "common/product/etc/rv/YTPatched.apk"
+    "common/product/etc/rv/YTMusicPatched.apk"
+)
 
-echo "[5/5] Re-adding files with LFS tracking..."
+for apk in "${apk_files[@]}"; do
+    git rm --cached "$apk" 2>/dev/null || true
+done
+
 git add .gitattributes
-git add common/product/app/YouTube/com.google.android.youtube.apk
-git add common/product/app/YTMusic/com.google.android.apps.youtube.music.apk
-git add common/product/etc/rv/YTPatched.apk
-git add common/product/etc/rv/YTMusicPatched.apk
-git add common/Android.mk common/BoardConfigVendor.mk common/common-vendor.mk products/ sepolicy/
+for apk in "${apk_files[@]}"; do
+    git add "$apk"
+done
 
-echo ""
-echo "✅ Files ready to commit!"
-echo ""
-echo "Next steps:"
-echo "1. Review the changes: git status"
-echo "2. Commit: git commit -m 'Add real APKs with Git LFS'"
-echo "3. Force push: git push -f origin qpr2-new"
-echo ""
+git commit -m "Update apks to latest"
+
+printf '%s\n' "OK: committed with Git LFS pointers."
+printf '%s\n' "Next: git lfs ls-files && git push origin main"
