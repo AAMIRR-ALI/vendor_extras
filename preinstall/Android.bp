@@ -1,0 +1,6 @@
+android_app_import {
+    name: "NekogramPreinstall",
+    apk: "Nekogram.apk",
+    presigned: true,
+    installable: false,
+}
