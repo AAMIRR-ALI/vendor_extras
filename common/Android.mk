@@ -1,68 +1,24 @@
 # ReVanced Prebuilt Apps
 LOCAL_PATH := $(call my-dir)
 
-# Stock YouTube
+# Stock Nekogram
 include $(CLEAR_VARS)
-LOCAL_MODULE        := YouTube
-LOCAL_SRC_FILES     := product/app/YouTube/com.google.android.youtube.apk
+LOCAL_MODULE        := Nekogram
+LOCAL_SRC_FILES     := product/app/Nekogram/tw.nekomimi.nekogram.apk
 LOCAL_MODULE_CLASS  := ETC
-LOCAL_MODULE_PATH   := $(TARGET_OUT_PRODUCT)/app/YouTube
-LOCAL_INSTALLED_MODULE_STEM := com.google.android.youtube.apk
+LOCAL_MODULE_PATH   := $(TARGET_OUT_PRODUCT)/app/Nekogram
+LOCAL_INSTALLED_MODULE_STEM := tw.nekomimi.nekogram.apk
 LOCAL_PRODUCT_MODULE := true
 include $(BUILD_PREBUILT)
 
-# Patched YouTube
+# Copy Nekogram native libs
 include $(CLEAR_VARS)
-LOCAL_MODULE            := YouTube_patched
-LOCAL_SRC_FILES         := product/etc/rv/YTPatched.apk
-LOCAL_MODULE_CLASS      := ETC
-LOCAL_MODULE_TAGS       := optional
-LOCAL_PRODUCT_MODULE    := true
-LOCAL_MODULE_PATH       := $(TARGET_OUT_PRODUCT)/etc/rv
-LOCAL_INSTALLED_MODULE_STEM := YTPatched.apk
-include $(BUILD_PREBUILT)
-
-# Copy YouTube native libs
-include $(CLEAR_VARS)
-LOCAL_MODULE := YouTube_libdir
+LOCAL_MODULE := Nekogram_libdir
 LOCAL_MODULE_CLASS := ETC
 LOCAL_PRODUCT_MODULE := true
-LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/app/YouTube/lib
-LOCAL_PREBUILT_MODULE_FILE := $(LOCAL_PATH)/product/app/YouTube/lib/placeholder.txt
+LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/app/Nekogram/lib
+LOCAL_PREBUILT_MODULE_FILE := $(LOCAL_PATH)/product/app/Nekogram/lib/placeholder.txt
 LOCAL_POST_INSTALL_CMD := \
     mkdir -p $(LOCAL_MODULE_PATH); \
-    cp -rf $(LOCAL_PATH)/product/app/YouTube/lib/* $(LOCAL_MODULE_PATH)/
-include $(BUILD_PREBUILT)
-
-# Stock YTMusic
-include $(CLEAR_VARS)
-LOCAL_MODULE        := YTMusic
-LOCAL_SRC_FILES     := product/app/YTMusic/com.google.android.apps.youtube.music.apk
-LOCAL_MODULE_CLASS  := ETC
-LOCAL_MODULE_PATH   := $(TARGET_OUT_PRODUCT)/app/YTMusic
-LOCAL_INSTALLED_MODULE_STEM := com.google.android.apps.youtube.music.apk
-LOCAL_PRODUCT_MODULE := true
-include $(BUILD_PREBUILT)
-
-# Patched YTMusic
-include $(CLEAR_VARS)
-LOCAL_MODULE            := YTMusic_patched
-LOCAL_SRC_FILES         := product/etc/rv/YTMusicPatched.apk
-LOCAL_MODULE_CLASS      := ETC
-LOCAL_MODULE_TAGS       := optional
-LOCAL_PRODUCT_MODULE    := true
-LOCAL_MODULE_PATH       := $(TARGET_OUT_PRODUCT)/etc/rv
-LOCAL_INSTALLED_MODULE_STEM := YTMusicPatched.apk
-include $(BUILD_PREBUILT)
-
-# Copy YTMusic native libs
-include $(CLEAR_VARS)
-LOCAL_MODULE := YTMusic_libdir
-LOCAL_MODULE_CLASS := ETC
-LOCAL_PRODUCT_MODULE := true
-LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/app/YTMusic/lib
-LOCAL_PREBUILT_MODULE_FILE := $(LOCAL_PATH)/product/app/YTMusic/lib/placeholder.txt
-LOCAL_POST_INSTALL_CMD := \
-    mkdir -p $(LOCAL_MODULE_PATH); \
-    cp -rf $(LOCAL_PATH)/product/app/YTMusic/lib/* $(LOCAL_MODULE_PATH)/
+    cp -rf $(LOCAL_PATH)/product/app/Nekogram/lib/* $(LOCAL_MODULE_PATH)/
 include $(BUILD_PREBUILT)
